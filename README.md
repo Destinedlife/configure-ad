@@ -91,7 +91,7 @@ Now copy dc-1 public IP Address from the virtual machine page. Then remotely con
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Click windows defender Firewall Propeities and set fire wall state to off and hit apply.
+Click windows defender Firewall Propeities and set fire wall state to off on the Domain, private, public profile and hit apply.
 
 **Only turning off the firewall for ease of the tutorial, don't do this in real life**
 
@@ -104,7 +104,7 @@ Now cilent-1 needs DNS settings needs to be set DC-1's Private IP Address. Back 
 <img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Now from the Virtual machine page restart cilent-1. 
+Now from the Virtual machine page restart cilent-1. Once cilent-1 restarts, remotely connect to it and open powershell.To ensure that dc-1 and cilent-1 are properly connected ping them using Powershell.  In Powrshell type "ping (DC-1 Private IP Address)". If the ping is succcessful, type "ipconfig /all" to see the output for the DNS servers is dc-1's private IP Address (10.0.0.4).
 
 </p>
 <br />
