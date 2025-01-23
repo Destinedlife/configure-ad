@@ -173,6 +173,44 @@ log into clint-1 as labuser. Right-click on the start menu > system. On right si
 </p>
 <p>
 Log back into dc-1 and confirm that cilent-1 appears in active directory. open active directory user and compueters > mydomain.com > computers. Clinet-1 should be in this OU.
+  **If you want to take a break and save money in your Azure account Go back to Azure portal > Virtual machine then select your VM and click stop. When you are ready to continue select Start on this page.**
+</p>
+<br />
+
+ <p>
+   <h3>Setup Remote Desktop for Non-adminstrative users on cilent-1</h3>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Next Log into cilent-1 as mydomain.com\jane_admin. Right-click on the start menu > system. Then on the right click remote desktop > select user that can remotely access this PC. Then click add and type "domain users" and click ok. By doing this non-administrative users are now able to remotely access Cilent-1.
+</p>
+<br />
+
+ <p>
+   <h3>Create a additional users and attempt to log into cilent-1 with one users</h3>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+log in to dc-1 as Peter_admin. Next, open Powershell_ise as a administrator by right-clicking then clcking run as adminastrator. Copy this 
+  
+  [script](https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1) to create users. In Powershell, create a new file (top left paper icon) and paste the script. Press CRTL+S and save the script to the desktop. Name it "create-users". By running this script it will create a 10000 users with random names. Then click play button to run the script
+</p>
+<br />
+
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Now back in Active directory user and employees in the _EMPLOYEES OU there should be a ton of employees. Pick a random name and save it in your notes. Next log in cilent-1 with that employee.
+
+  - Username: mydomain.com\(empolyee name)
+
+      EX: mydomain.com\bev.xij
+
+- Password: Password1
+
+open file explorer and go to This PC > windows(C:) > Users. your employee local folder should be there. Log out of cilent-1 and back on dc-1 stop the script if its still running.
+  
 </p>
 <br />
 
