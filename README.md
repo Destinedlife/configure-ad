@@ -106,6 +106,80 @@ Now cilent-1 needs DNS settings needs to be set DC-1's Private IP Address. Back 
 <p>
 Now from the Virtual machine page restart cilent-1. Once cilent-1 restarts, remotely connect to it and open powershell.To ensure that dc-1 and cilent-1 are properly connected ping them using Powershell.  In Powrshell type "ping (DC-1 Private IP Address)". If the ping is succcessful, type "ipconfig /all" to see the output for the DNS servers is dc-1's private IP Address (10.0.0.4).
 
+**If you want to take a break and save money in your Azure account Go back to Azure portal > Virtual machine then select your VM and click stop. When you are ready to continue select Start on this page.**
 </p>
 <br />
+
+<h3>Install Active Directory</h3>
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Next connect to dc-1 and open server manager. Click add roles and features then hit next until you get to server selection. Then, click Active Directory Domain Services > add features. Click next umtil the confirmation page, check "restart...". and hit install.
+</p>
+<br />
+
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Once installed, back in server manager, Click the flag on the top right then click domain "Promte this server to a domain controller". Select add a new forest and name the root domain "mydomain.com". click next and set the password to "Password1". then hit next until the prerequisites check. then hit install. It should automatically restart. Now relog in to dc-1 but this time the username will "mydomain.com\labuser". This is neccessary to log in as a domain user.
+</
+<br />
+
+  <h3>Create a Domain Admin user with the domain</h3>
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Open active directory users and computers. Then right-click mydomain.com > New > Organizational Unit (OU). Name the new unit "_EMPLOYEES" and create another named "_ADMINS" (they must be spelled exactly like this, so feel free to copy and paste). the next step is to add users to these folders. Right-click on _ADMINS > new > User. Put in the following: 
+
+  - name: Peter Quill
+  - Logon: peter_admin
+  - Password "Cyberlab123!"
+
+Save this in a note
+
+  ***Only do the following for this tutorial, don't do this in real life:***
+  - Uncheck " User must change password at next logon"
+  - check "password never expires" 
+
+</p>
+<br />
+
+<p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+In order to make Peter an admin he must be added to the "domain Admin" security group. Right-click on Peter > properties > members of. Type "Domain admins", click domain names, and click ok. Then log out of labuser and relog in as Peter_ admin. 
+</p>
+<br />
+
+ <h3>Join cilent-1 tp your domain(mydomain.com)</h3>
+
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+log into clint-1 as labuser. Right-click on the start menu > system. On right side click on "rename this pc advance". Then click change, select domain under member of, and type "mydomain.com". In order to change domains an Admin log in must used. Log with mydomain.com\peter_admin click ok to restart the VM.
+</p>
+<br />
+
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Log back into dc-1 and confirm that cilent-1 appears in active directory. open active directory user and compueters > mydomain.com > computers. Clinet-1 should be in this OU.
+</p>
+<br />
+
+
+
+
+
+
+
 
