@@ -209,9 +209,59 @@ Now back in Active directory user and employees in the _EMPLOYEES OU there shoul
 
 - Password: Password1
 
-open file explorer and go to This PC > windows(C:) > Users. your employee local folder should be there. Log out of cilent-1 and back on dc-1 stop the script if its still running.
+open file explorer and go to This PC > windows(C:) > Users. Your employee local folder should be there. Log out of cilent-1 and back on dc-1 stop the script if its still running.
+</p>
+<br />
+
+<h3>Setup Group policies and How to Handle Account Lockouts</h3>
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Log in to dc-1 and open Group Policy Management. Go to Forest > Domains > mydomain.com.  right-click default domain Policy and hit edit. Then go to Computer Configuration > Policies > Windows Settings > Security Settings > Account Policies > Account Lockout Policy.
+  Double-click account lockout duration. Set the time to 30 mins and hit apply. The reset of the settings will automatically be changed to the following:
+ 
+  - account lockout threshold: 5 attempts
+  - Reset account lockout after : 10 mins
+
+Enable allow administrator account lockout.
   
 </p>
+<br />
+
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Log in to cilent-1 as Peter_admin and open CMD. type "gpupdate /force" to force thr group policy to update on the domain. log out of peter_ admin on cilent-1.
+</p>
+<br />
+
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+Log in to dc-1 and pick a random user that was created previously (save this user in your notes for later).Then log in with the user you picked and use a bad password 6 times. A message should appear that the account has been locked out. Back in active directory, find your user and open properties. You can search for the users name by rigtht-clicking the Mydomain.com and go to find. There search for the user. Inside the user properties go to account and check unlock account and hit apply. Then log in to cilent-1 as the user correctly.
+</p>
+<br />
+
+<h3>Enabling and disabling accounts</h3>
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+Go to active directory and find the user again. Right-click on the user and click disable account. Then try to log into the user and view the error message. the reenable the account in active directory
+</p
+<br />
+
+
+<h3>observe the log</h3>
+ <p>
+<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+</p>
+Log into dc-1 as peter_admin. In the task bar, search for "eventvwr". Then go to windows logs > security. right-click on securtiy > find and find your user. Now all the logs from this user is able to be seen. now log in as cilent-1 with the user. in the taskbar, search for "eventvwr.msc" and open it as an admin. Log in as Peter_admin. Then go to windows logs > security. right-click on securtiy. Now all log ins, outs and failures are viewable. Click on one that says "aduit failure" and see why it failed below.
+
+Congratulations, Active directory has been successfully configure.
+</p
 <br />
 
 
