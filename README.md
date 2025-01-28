@@ -21,8 +21,6 @@ This tutorial outlines the implementation of on-premises Active Directory within
 
 - Setup Domain Controler Controller in Azure
 - Setup Clinet-1 in Azure
-- 
-- Step 4
 
 <h2>Deployment and Configuration Steps</h2>
 
